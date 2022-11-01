@@ -61,9 +61,9 @@
         }
 
         function verificarD(control) {
-            if (control.value.length > 250) {
+            if (control.value.length > 300) {
                 control.focus();
-                alert('No exceda los 250 carateres');
+                alert('No exceda los 300 carateres');
                 control.value = "";
             }
         }

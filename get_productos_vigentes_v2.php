@@ -11,7 +11,7 @@ if (isset($_GET['eliminado'])) {
 
 if (!empty($vigente) || $vigente == 0 || $vigente == 1) {
 	/** SE CREA EL OBJETO DE CONEXION */
-	@$link = new mysqli('localhost', 'root', '9GJBuXtwzDMSU6Ia', 'marketzone');
+	@$link = new mysqli('localhost', 'root', 'Ro.2106.', 'marketzone');
 
 	/** comprobar la conexión */
 	if ($link->connect_errno) {
