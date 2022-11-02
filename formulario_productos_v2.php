@@ -98,15 +98,16 @@
                 <br>
                 <li>Marca: <select name="marca" id="marca" onchange="verificarM(this)">
                         <option value="<?= !empty($_POST['marca']) ? $_POST['marca'] : $_GET['marca'] ?>">Elegir</option>
-                        <option value="Logitech">Logitech</option>
-                        <option value="Samsung">Samsung</option>
-                        <option value="Sony">Sony</option>
-                        <option value="Xiaomi">Xiaomi</option>
-                        <option value="Raizer">Raizer</option>
-                        <option value="Steren">Steren</option>
-                        <option value="Acteck">Acteck</option>
-                        <option value="Hyperx">Hyperx</option>
-                        <option value="Perfect Choice">Perfect Choice</option>
+                        <option value="Prinsel">Prinsel</option>
+                        <option value="Ifanti">Ifanti</option>
+                        <option value="GUCCI">GUCCI</option>
+                        <option value="MndMeld">MndMeld</option>
+                        <option value="Dosyu">Dosyu</option>
+                        <option value="avon">avon</option>
+                        <option value="SAMSUNG">SAMSUNG</option>
+                        <option value="SWAROVSKI">SWAROVSKI</option>
+                        <option value="Bershka">Bershka</option>
+                        <option value="Johnny Urban">Johnny Urban</option>
                     </select>
                     <br><br>
                 <li>Modelo: <input id="modelo" name="modelo" type="text" onBlur="verificarMod(this)" value="<?= !empty($_POST['modelo']) ? $_POST['modelo'] : $_GET['modelo'] ?>" required /></li>
@@ -114,7 +115,7 @@
                 <li>Precio: <input id="precio" name="precio" type="text" placeholder="$000.00" onchange="verificarP(this)" value="<?= !empty($_POST['precio']) ? $_POST['precio'] : $_GET['precio'] ?>" required /></li>
                 <br>
                 <li>Detalles: <br>
-                    <textarea name="detalles" rows="3" cols="50" id="detalles" placeholder="No más de 250 caracteres de longitud" onBlur="verificarD(this)">
+                    <textarea name="detalles" rows="3" cols="50" id="detalles" placeholder="No más de 300 caracteres de longitud" onBlur="verificarD(this)">
                     <?php echo !empty($_POST['detalles']) ? $_POST['detalles'] : $_GET['detalles']; ?>
                     </textarea>
                     <br><br>

@@ -1,8 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es">
-
+    
 <?php
-$id = $_POST["id"];
 $nombre = $_POST["nombre"];
 $marca  = $_POST["marca"];
 $modelo = $_POST["modelo"];
@@ -12,32 +11,37 @@ $unidades = $_POST["unidades"];
 $imagen   = $_POST["imagen"];
 $eliminado = 0;
 
-/* MySQL Conexion*/
-$link = mysqli_connect('localhost', 'root', 'Ro.2106.', 'marketzone');
-// Chequea coneccion
-if ($link == false) {
-    die("ERROR: No pudo conectarse con la DB. " . mysqli_connect_error());
-}
-// Ejecuta la actualizacion del registro
-$sql = "UPDATE productos SET nombre= '{$nombre}', marca='{$marca}', modelo='{$modelo}', precio={$precio}, detalles='{$detalles}', unidades={$unidades}, imagen='{$imagen}' WHERE id={$id}";
-if (mysqli_query($link, $sql)) {
-    echo "Registro actualizado.";
+/** SE CREA EL OBJETO DE CONEXION */
+@$link = new mysqli('localhost', 'root', 'Ro.2106.', 'marketzone');
 
-    echo '<p style="font-family: Arial, Helvetica, sans-serif;">';
-    echo '<strong>PRODUCTO INSERTADO</strong> <br><br> <strong>ID: </strong>' . $id;
-    echo '<br><br><strong>NOMBRE: </strong>' . $nombre;
-    echo '<br><br><strong>MARCA: </strong>' . $marca;
-    echo '<br><br><strong>MODELO: </strong>' . $modelo;
-    echo '<br><br><strong>PRECIO: </strong>' . $precio;
-    echo '<br><br><strong>DETALLES: </strong>' . $detalles;
-    echo '<br><br><strong>UNIDADES: </strong>' . $unidades;
-    echo '<br><br><strong>IMAGEN: </strong><br> <img src=http://localhost/tecnologiasweb/practicas/p05/' . $imagen . ' width="200px" height="200px" />';
-    echo '</p>';
-} else {
-    echo "ERROR: No se ejecuto $sql. " . mysqli_error($link);
+/** comprobar la conexión */
+if ($link->connect_errno) {
+    die('Falló la conexión: ' . $link->connect_error . '<br/>');
+    /** NOTA: con @ se suprime el Warning para gestionar el error por medio de código */
 }
-// Cierra la conexion
-mysqli_close($link);
+
+if ($nombre != "" && $marca != "" && $modelo != "" && $precio != "" && $detalles != "" && $unidades != "" && $imagen != "") {
+    $sql = "INSERT INTO productos VALUES (null, '{$nombre}', '{$marca}', '{$modelo}', {$precio}, '{$detalles}', {$unidades}, '{$imagen}', 0)";
+    if ($link->query($sql)) {
+        echo '<p style="font-family: Arial, Helvetica, sans-serif;">';
+        echo '<strong>PRODUCTO INSERTADO</strong> <br><br> <strong>ID: </strong>' . $link->insert_id;
+        echo '<br><br><strong>NOMBRE: </strong>' . $nombre;
+        echo '<br><br><strong>MARCA: </strong>' . $marca;
+        echo '<br><br><strong>MODELO: </strong>' . $modelo;
+        echo '<br><br><strong>PRECIO: </strong>' . $precio;
+        echo '<br><br><strong>DETALLES: </strong>' . $detalles;
+        echo '<br><br><strong>UNIDADES: </strong>' . $unidades;
+        echo '<br><br><strong>IMAGEN: </strong><br> <img src=http://localhost/tecnologiasweb/practicas/p05/' . $imagen . ' width="200px" height="200px" />';
+        
+        echo '</p>';
+    } else {
+        echo '<br><strong>UN ELEMENTO  ESTAN EN  FORMATO INCORRECTO. </strong>';
+    }
+} else {
+    echo '<br><strong>ALGUN DATO NO SE INGRESO, ESTA EN BLANCO </strong>';
+}
+
+$link->close();
 
 ?>
 
